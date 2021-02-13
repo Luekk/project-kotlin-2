@@ -1,5 +1,9 @@
 class Graphics (val graphics: String) {
     fun info():String{
-        return "$graphics"
+        if(graphics == "none"){
+            return "nie posiada karty graficznej"
+        }else {
+            return "$graphics"
+        }
     }
 }

@@ -1,5 +1,5 @@
-class RAM (val size: Int){
+class RAM (val RAM: Int){
     fun info():String{
-        return "$size"
+        return "$RAM"
     }
 }

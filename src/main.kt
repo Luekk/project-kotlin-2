@@ -11,4 +11,9 @@ fun main(args: Array<String>) {
         println("wyswietlam info serwera")
     }
     server.infoServer()
+    fun req(){
+        client.serverSend()
+        server.req(10,20)
+    }
+    req()
 }

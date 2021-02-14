@@ -2,6 +2,7 @@ import java.lang.Thread.sleep
 
 class Client (override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
+    val ip = "192.168.567.12"
 
     private fun waitTime(a: Long) {
         Thread.sleep(a)
@@ -29,13 +30,16 @@ class Client (override val processor: Processor, override val graphics: Graphics
     }
 
     fun clientTime() {
-        println("Klient: Czas dostępu do serwera wynosi ${randInt(3)}ms")
-    }
-
-    private fun randInt(a: Int) {
-        var random = (Math.random() * a).toInt()
+        var random = (Math.random() * 10).toInt()
         if (random == 0) {
             random = 1
         }
+        println("Klient: Czas dostępu do serwera wynosi ${random}ms")
+    }
+    fun clientIp(){
+        println("$ip")
+    }
+    private fun randInt(a: Int) {
+
     }
 }

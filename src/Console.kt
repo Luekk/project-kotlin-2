@@ -1,6 +1,6 @@
 import kotlin.system.exitProcess
 
-class Console {
+class Console() {
     val client = Client(Processor("Intel Core I7"), Graphics("RTX 3090"), RAM(16))
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
 
@@ -62,26 +62,32 @@ class Console {
         println("-l - logi serwera")
         return
     }
-    private fun commandLine(){
+    private fun commandLine():Boolean{
+        var booleanClient = false
+        var booleanServer = false
         var type = readLine()
         println("KOMEDYYYY")
         if(type == "client start" || type == "server start"){
             when(type){
-                "client start" -> println("client started")
-                "server start" -> println("server started")
+                "client start" ->{
+                    println("client started")
+                    safety("c")
+                }
+                "server start" -> {
+                    println("server started")
+                    booleanServer = true
+                    safety("s")
+                }
                 else -> println("Spróbuj ponownie")
             }
         }
-        else if(type == "client -p"){
-            client.serverPing()
-        }
-        else if(type == "client -p"){
-            client.serverPing()
-        }
-        else if(type == "client -t"){
-            client.clientTime()
-        }
-        commandLine()
+        val safety = safety()
+        if(safety() == true)
+        else if(type == "client -p"){client.serverPing()}
+        else if(type == "client -p"){ client.serverPing()}
+        else if(type == "client -t"){client.clientTime()}
+        else if(type == "client -ip"){client.clientIp()}
+        println("$booleanClient, $booleanServer")
     }
 
 
@@ -90,5 +96,16 @@ class Console {
         if(random == 0){
             random = 1
         }
+    }
+    open fun safety(letter:String){
+        var booleanClient = false
+        var booleanServer = false
+        if(letter == "c"){booleanClient = true}
+        if(letter == "s"){booleanServer = true}
+        else{
+            booleanClient = false
+            booleanClient = false
+        }
+        return
     }
 }

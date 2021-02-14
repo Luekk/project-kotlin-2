@@ -9,4 +9,5 @@ abstract class Computer{
     open fun infoServer(){
         println("Serwer używa procesora ${processor.info()}, posiada ${ram.info()} i ${graphics.info()}")
     }
+
 }

@@ -22,14 +22,17 @@ class Console {
         else if(type == "client -h" || type == "client -help"){
             clientHelp()
         }
+        else if(type == "server -h" || type == "server -help"){
+            serverHelp()
+        }
         else if(type == "start"){
             println("Prosze uruchomic pierwsze klienta za pomocą komendy 'client start' a potem serwer za pomocą 'server start'")
             commandLine()
         }
-        else if(start() == "client -params") {
+        else if(type == "client -params") {
             client.infoClient()
         }
-        else if(start() == "server -params"){
+        else if(type == "server -params"){
             server.infoServer()
         }
         else{
@@ -50,8 +53,42 @@ class Console {
         println("-ip  -  pokazuje adres IP Klienta")
         println("-status  -  pokazuje aktualny status klienta")
         println("-params  -  pokazuje parametry komputera")
+        return
+    }
+    private fun serverHelp(){
+        println("-r - restart serwera")
+        println("-s - aktualny status serwera")
+        println("-ip - pokazuje adres IP serwera")
+        println("-l - logi serwera")
+        return
     }
     private fun commandLine(){
+        var type = readLine()
         println("KOMEDYYYY")
+        if(type == "client start" || type == "server start"){
+            when(type){
+                "client start" -> println("client started")
+                "server start" -> println("server started")
+                else -> println("Spróbuj ponownie")
+            }
+        }
+        else if(type == "client -p"){
+            client.serverPing()
+        }
+        else if(type == "client -p"){
+            client.serverPing()
+        }
+        else if(type == "client -t"){
+            client.clientTime()
+        }
+        commandLine()
+    }
+
+
+    private fun randInt(a:Int){
+        var random = (Math.random()*a).toInt()
+        if(random == 0){
+            random = 1
+        }
     }
 }

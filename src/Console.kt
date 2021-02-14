@@ -26,8 +26,8 @@ class Console() {
             serverHelp()
         }
         else if(type == "start"){
-            println("Prosze uruchomic pierwsze klienta za pomocą komendy 'client start' a potem serwer za pomocą 'server start'")
-            commandLine()
+            println("Prosze uruchomic klienta za pomocą komendy 'client start'")
+            safetyCheck()
         }
         else if(type == "client -params") {
             client.infoClient()
@@ -50,8 +50,8 @@ class Console() {
     private fun clientHelp(){
         println("-p  -  pinguje serwer")
         println("-t  -  pokazuje czas dostępu do serwera")
+        println("-s  -  pokazuje aktualny status klienta")
         println("-ip  -  pokazuje adres IP Klienta")
-        println("-status  -  pokazuje aktualny status klienta")
         println("-params  -  pokazuje parametry komputera")
         return
     }
@@ -62,32 +62,32 @@ class Console() {
         println("-l - logi serwera")
         return
     }
-    private fun commandLine():Boolean{
-        var booleanClient = false
-        var booleanServer = false
+    private fun safetyCheck(){
         var type = readLine()
         println("KOMEDYYYY")
-        if(type == "client start" || type == "server start"){
-            when(type){
-                "client start" ->{
-                    println("client started")
-                    safety("c")
-                }
-                "server start" -> {
-                    println("server started")
-                    booleanServer = true
-                    safety("s")
-                }
-                else -> println("Spróbuj ponownie")
-            }
+        safetyClient("t")
+        safetyServer("t")
+
+        if(type == "client start") {
+            safeDone()
         }
-        val safety = safety()
-        if(safety() == true)
+    }
+
+
+    private fun safeDone(){
+        var type = readLine()
+        if(type == "client -s"){client.statusClient()}
         else if(type == "client -p"){client.serverPing()}
-        else if(type == "client -p"){ client.serverPing()}
         else if(type == "client -t"){client.clientTime()}
         else if(type == "client -ip"){client.clientIp()}
-        println("$booleanClient, $booleanServer")
+        else if(type == "client -params"){client.infoClient()}
+        else if(type == "server -params"){server.infoServer()}
+        else if(type == "server -s"){server.statusServer()}
+        else if(type == "server -r"){server.restart()}
+        else if(type == "exit"){exitProcess(0)}
+        else if(type == "client send"){}
+        else{"Bad syntax"}
+        safeDone()
     }
 
 
@@ -97,15 +97,10 @@ class Console() {
             random = 1
         }
     }
-    open fun safety(letter:String){
-        var booleanClient = false
-        var booleanServer = false
-        if(letter == "c"){booleanClient = true}
-        if(letter == "s"){booleanServer = true}
-        else{
-            booleanClient = false
-            booleanClient = false
-        }
-        return
+    open fun safetyClient(let:String):Boolean{
+        return let == "t"
+    }
+    open fun safetyServer(let:String):Boolean{
+        return let == "t"
     }
 }

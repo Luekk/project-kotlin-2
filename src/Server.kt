@@ -29,4 +29,20 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             println(multiply(a,b))
         }
     }
+    private fun dotting(){
+        fun waitTime(a:Long) {Thread.sleep(a)}
+        for (i in 0..2){
+            waitTime(1000)
+            print(".")
+        }
+        waitTime(1000)
+        println()
+    }
+    fun restart(){
+        println("Restartowanie serwera")
+        for (i in 0..1){
+            dotting()
+        }
+        println("Serwer działa")
+    }
 }

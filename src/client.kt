@@ -1,22 +1,36 @@
-import java.lang.Thread.sleep
+import java.util.Scanner
 
 class Client (override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
     val w = Waiting()
+    val scan = Scanner(System.`in`)
 
 
     fun serverSend() {
         fun sending() {
+            println("Wpisz pierwszą liczbę")
             print("$ ")
+            val num1 = scan.nextInt()
+            println("Wpisz drugą liczbę")
+            print("$ ")
+            var num2 = scan.nextInt()
+            println("Wybierz sposób liczenia")
+            print("$")
             var type = readLine()
-            if (type =)
-                println("Client: Wysyłanie zapytania do serwera.")
-            w.w(1000)
-            println("Client: Wysłano zapytanie.")
-            return
+
+            if(type == "plus" || type == "+"){
+                server.req(num1,num2,"p")
+            } else if (type == "minus" || type == "-"){
+                server.req(num1,num2,"m")
+            }
         }
         println("Wyślij zapytanie 'Math' do serwera")
-        sending()
+        val type = readLine()
+        if(type == "Math") {
+            sending()
+        } else {
+            println("Bad syntax")
+        }
     }
 
     fun serverPing() {

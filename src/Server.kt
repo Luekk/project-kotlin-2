@@ -6,12 +6,7 @@ class Server(override val processor: Processor, override val graphics: Graphics,
     fun req(a:Int,b:Int,c:String){
         serverReceive()
         w.wF(1000,1)
-        if(c == "p"){res(a,b,c)}
-        if(c == "m"){res(a,b,c)}
-        if(c == "p"){res(a,b,c)}
-        if(c == "p"){res(a,b,c)}
-        if(c == "p"){res(a,b,c)}
-        if(c == "p"){res(a,b,c)}
+        if(c=="p"||c=="m"||c=="r"||c=="d"||c=="e"||c=="s"){res(a,b,c)}
     }
     open fun serverReceive(){
         println("Serwer: Odebrano zapytanie")
@@ -19,7 +14,6 @@ class Server(override val processor: Processor, override val graphics: Graphics,
     private fun res(a:Int,b:Int,c:String){
         fun plus(){
             println("Serwer: Wynik dodawania $a + $b = ${a+b}")
-            return
         }
         fun minus(){
             println("Serwer: Wynik odejmowania $a - $b = ${a-b}")

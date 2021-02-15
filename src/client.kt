@@ -1,5 +1,4 @@
 import java.util.Scanner
-import javax.print.DocFlavor
 
 class Client (override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))

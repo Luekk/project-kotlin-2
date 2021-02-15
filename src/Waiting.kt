@@ -2,7 +2,7 @@ import java.lang.Thread.sleep
 
 class Waiting {
     fun w(a:Long){
-        Thread.sleep(a)
+        sleep(a)
     }
     fun wF(a:Long,b:Int){
         for(i in 0..b){

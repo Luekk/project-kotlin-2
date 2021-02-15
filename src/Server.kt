@@ -7,6 +7,15 @@ class Server(override val processor: Processor, override val graphics: Graphics,
         serverReceive()
         w.wF(1000,1)
         if(c=="p"||c=="m"||c=="r"||c=="d"||c=="e"||c=="s"){res(a,b,c)}
+        else if (c=="ip"){
+            ipCheck()
+        }
+        else if(c=="restart"){
+            restart()
+        }
+        else if(c=="status"){
+            statusServer()
+        }
     }
     open fun serverReceive(){
         println("Serwer: Odebrano zapytanie")
@@ -41,11 +50,14 @@ class Server(override val processor: Processor, override val graphics: Graphics,
         else {println("Bad syntax")}
         return
     }
-    fun restart(){
+    private fun ipCheck(){
+        println("$sip")
+    }
+    private fun restart(){
         println("Restartowanie serwera")
         for (i in 0..1){
             w.wF(1000, 2)
         }
-        println("Serwer działa")
+        println("Serwer uruchomiony ponownie. Ip: $sip Port: $sport")
     }
 }

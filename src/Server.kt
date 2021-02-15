@@ -1,15 +1,15 @@
-import java.lang.Thread.sleep
-
 class Server(override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
+    val w = Waiting()
+
     fun req(a:Int,b:Int):Int{
         println("Serwer: Odebrano zapytanie")
-        res(a,b)
+        res(a,b,"k")
         return a+b
     }
     fun serverReceive(){
         println("Serwer: Odebrano zapytanie")
     }
-    private fun res(a:Int,b:Int){
+    private fun res(a:Int,b:Int,c:String){
         fun waitTime(a:Long) {Thread.sleep(a)}
         fun waiting():String {
             for (i in 0..2) {
@@ -29,19 +29,10 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             println(multiply(a,b))
         }
     }
-    private fun dotting(){
-        fun waitTime(a:Long) {Thread.sleep(a)}
-        for (i in 0..2){
-            waitTime(1000)
-            print(".")
-        }
-        waitTime(1000)
-        println()
-    }
     fun restart(){
         println("Restartowanie serwera")
         for (i in 0..1){
-            dotting()
+            w.wF(1000, 2)
         }
         println("Serwer działa")
     }

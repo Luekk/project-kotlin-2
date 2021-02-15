@@ -70,6 +70,8 @@ class Console() {
 
         if(type == "client start") {
             safeDone()
+        } else {
+            println("Bad syntax.")
         }
     }
 
@@ -85,17 +87,9 @@ class Console() {
         else if(type == "server -s"){server.statusServer()}
         else if(type == "server -r"){server.restart()}
         else if(type == "exit"){exitProcess(0)}
-        else if(type == "client send"){}
+        else if(type == "client send"){client.serverSend()}
         else{"Bad syntax"}
         safeDone()
-    }
-
-
-    private fun randInt(a:Int){
-        var random = (Math.random()*a).toInt()
-        if(random == 0){
-            random = 1
-        }
     }
     open fun safetyClient(let:String):Boolean{
         return let == "t"

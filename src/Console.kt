@@ -72,6 +72,7 @@ class Console() {
 
 
     private fun safeDone(){
+        print("client@command_Line $ ")
         var type = readLine()
         if(type == "client -s"){client.statusClient()}
         else if(type == "client -h" || type == "client -help"){clientHelp()}

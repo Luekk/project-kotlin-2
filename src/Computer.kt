@@ -7,6 +7,9 @@ abstract class Computer{
     val sport = 81
     val sip = "142.532.65.34"
 
+    open fun info(){
+        println("Emulacja serwera i klienta")
+    }
     open fun infoClient(){
         println("Komputer używa procesora ${processor.info()}, karty graficznej ${graphics.info()} i posiada ${ram.info()}GB pamięci RAM")
     }

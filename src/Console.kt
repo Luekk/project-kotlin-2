@@ -4,7 +4,7 @@ class Console() {
     val client = Client(Processor("Intel Core I7"), Graphics("RTX 3090"), RAM(16))
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
 
-    fun init(){
+    init{
         println("Emulacja server-client...")
         println("Jeżeli chcesz odrazu zacząć emoluwać klienta i serwera wpisz start.")
         start()
@@ -82,11 +82,12 @@ class Console() {
         else if(type == "client -ip"){client.clientIp()}
         else if(type == "client -params"){client.infoClient()}
         else if(type == "server -params"){server.infoServer()}
-        else if(type == "server -s"){server.req(1,1,"status")}
-        else if(type == "server -r"){server.req(1,2,"restart")}
-        else if(type == "server -ip"){server.req(1,1,"ip")}
+        else if(type == "server -s"){server.req(1,1,0.toFloat(),0.toFloat(),"status","n")}
+        else if(type == "server -r"){server.req(1,2,0.toFloat(),0.toFloat(),"restart","n")}
+        else if(type == "server -ip"){server.req(1,1,0.toFloat(),0.toFloat(),"ip","n")}
         else if(type == "exit"){exitProcess(0)}
         else if(type == "client send"){client.serverSend()}
+        else if(type=="info"||type=="client -info"||type=="server -info"||type=="server -i"||type=="client -i"){server.info()}
         else{"Bad syntax"}
         safeDone()
     }

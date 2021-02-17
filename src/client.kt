@@ -8,36 +8,70 @@ class Client (override val processor: Processor, override val graphics: Graphics
 
     fun serverSend() {
         fun sending() {
-            println("Wpisz pierwszą liczbę")
-            print("$ ")
-            val num1 = scan.nextInt()
-            println("Wpisz drugą liczbę")
-            print("$ ")
-            var num2 = scan.nextInt()
-            if (num1 !is Int){
-                println("Bad syntax")
-            }
-            if(num2 !is Int){
-                println("Bad syntax")
-            }
-            println("Wybierz sposób liczenia")
-            print("$ ")
-            var type = readLine()
+            fun intSend() {
+                var float = 0.toFloat()
+                println("Wpisz pierwszą liczbę")
+                print("$ ")
+                var num1 = scan.nextInt()
+                println("Wpisz drugą liczbę")
+                print("$ ")
+                var num2 = scan.nextInt()
+                println("Wybierz sposób liczenia")
+                print("$ ")
+                var type = readLine()
 
-            if(type == "plus" || type == "+" || type == "dodawanie"){
-                server.req(num1,num2,"p")
-            } else if (type == "minus" || type == "-" || type == "odejmowanie"){
-                server.req(num1,num2,"m")
-            } else if (type == "*" || type == "mnozenie" || type == "mnożenie"){
-                server.req(num1,num2,"r")
-            } else if (type == "/" || type == "dzielenie" || type == "dziel"){
-                server.req(num1,num2,"d")
-            } else if (type == "**" || type == "kwadrat" || type == "razy2"){
-                server.req(num1,num2,"s")
-            } else if (type == "pierwiastek" || type == "element" || type == "pierw"){
-                server.req(num1,num2,"e")
-            } else {
-                println("Bad syntax")
+                if (type == "plus" || type == "+" || type == "dodawanie") {
+                    server.req(num1, num2,float,float, "p","i")
+                } else if (type == "minus" || type == "-" || type == "odejmowanie") {
+                    server.req(num1, num2,float,float, "m","i")
+                } else if (type == "*" || type == "mnozenie" || type == "mnożenie") {
+                    server.req(num1, num2,float,float, "r","i")
+                } else if (type == "/" || type == "dzielenie" || type == "dziel") {
+                    server.req(num1, num2,float,float, "d","i")
+                } else if (type == "**" || type == "kwadrat" || type == "razy2") {
+                    server.req(num1, num2,float,float, "s","i")
+                } else if (type == "pierwiastek" || type == "element" || type == "pierw") {
+                    server.req(num1, num2,float,float, "e","i")
+                } else {
+                    println("Bad syntax")
+                }
+            }
+            fun floatSend():Float {
+                println("Wpisz pierwszą liczbę")
+                print("$ ")
+                var num1 = readLine()!!.toFloat()
+                println("Wpisz drugą liczbę")
+                print("$ ")
+                var num2 = readLine()!!.toFloat()
+                println("Wybierz sposób liczenia")
+                print("$ ")
+                var type = readLine()
+
+                if (type == "plus" || type == "+" || type == "dodawanie") {
+                    server.req(0, 0,num1,num2, "p","f")
+                } else if (type == "minus" || type == "-" || type == "odejmowanie") {
+                    server.req(0, 0,num1,num2, "m","f")
+                } else if (type == "*" || type == "mnozenie" || type == "mnożenie") {
+                    server.req(0, 0,num1,num2, "r","f")
+                } else if (type == "/" || type == "dzielenie" || type == "dziel") {
+                    server.req(0, 0,num1,num2, "d","f")
+                } else if (type == "**" || type == "kwadrat" || type == "razy2") {
+                    server.req(0, 0,num1,num2, "s","f")
+                } else if (type == "pierwiastek" || type == "element" || type == "pierw") {
+                    server.req(0, 0,num1,num2, "e","f")
+                } else {
+                    println("Bad syntax")
+                }
+                var sum = num1 + num2
+                return sum
+            }
+            println("Rodzaj liczby: Int/Float")
+            var numtype = readLine()
+            if(numtype == "Int"){
+                intSend()
+            }
+            else if(numtype == "Float"){
+                floatSend()
             }
         }
         println("Wyślij zapytanie 'Math' do serwera")
@@ -52,32 +86,22 @@ class Client (override val processor: Processor, override val graphics: Graphics
     fun serverPing() {
         println("Klient: pingowanie serwera")
         for (i in 0..3) {
-            var rand = random(5)
             w.w(1000)
             server.serverReceive()
-            println("Klient: ping: 142.532.65.34 port: 81 time: $rand ms")
+            println("Klient: ping: 142.532.65.34 port: 81 time: ${w.r(5)} ms")
         }
         println()
         println("Finished with 4 of 4 send and 0 lost.")
-        return
     }
 
     fun clientTime() {
-        var random = (Math.random() * 10).toInt()
-        if (random == 0) {
-            random = 1
-        }
-        println("Klient: Czas dostępu do serwera wynosi ${random}ms")
+        println("Klient: Czas dostępu do serwera wynosi ${w.r(10)}ms")
     }
     fun clientIp(){
         println("$ip")
     }
-    private fun random(a:Int):Int{
-        var random = (Math.random()*a).toInt()
-        if(random == 0){
-            random += 1
-        }
-        return random
+    override fun info(){
+        super.infoClient()
     }
 
 }

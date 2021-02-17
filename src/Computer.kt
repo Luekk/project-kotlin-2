@@ -2,7 +2,7 @@ abstract class Computer{
     abstract val processor: Processor
     abstract val graphics: Graphics
     abstract val ram: RAM
-    val port = 80
+    private val port = 80
     val ip = "192.168.567.12"
     val sport = 81
     val sip = "142.532.65.34"

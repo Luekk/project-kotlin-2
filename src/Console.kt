@@ -1,6 +1,6 @@
 import kotlin.system.exitProcess
 
-class Console() {
+class Console {
     val client = Client(Processor("Intel Core I7"), Graphics("RTX 3090"), RAM(16))
     val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
 
@@ -9,8 +9,8 @@ class Console() {
         println("Jeżeli chcesz odrazu zacząć emoluwać klienta i serwera wpisz start.")
         start()
     }
-    private fun start():String{
-        var type = readLine().toString()
+    private fun start(){
+        val type = readLine().toString()
         if(type == "-h" || type == "-help" || type == "h" || type == "help"){
             help()
         }
@@ -31,7 +31,6 @@ class Console() {
             println("Bad syntax. Wpisz start aby przejśc dalej")
             start()
         }
-        return type
     }
     private fun help(){
         println("Aby zobaczyć właściwości klienta wystarczy wpisac client -{komenda}")
@@ -56,9 +55,9 @@ class Console() {
         safeDone()
     }
     private fun safetyCheck(){
-        var type = readLine()
-        safetyClient("t")
-        safetyServer("t")
+        val type = readLine()
+        safetyClient("f")
+        safetyServer("f")
 
         if(type == "client start") {
             println("Klient uruchomiony")
@@ -73,7 +72,7 @@ class Console() {
 
     private fun safeDone(){
         print("client@command_Line $ ")
-        var type = readLine()
+        val type = readLine()
         if(type == "client -s"){client.statusClient()}
         else if(type == "client -h" || type == "client -help"){clientHelp()}
         else if(type == "server -h" || type == "server -help"){serverHelp()}
@@ -88,13 +87,15 @@ class Console() {
         else if(type == "exit"){exitProcess(0)}
         else if(type == "client send"){client.serverSend()}
         else if(type=="info"||type=="client -info"||type=="server -info"||type=="server -i"||type=="client -i"){server.info()}
-        else{"Bad syntax"}
+        else{println("Bad syntax")}
         safeDone()
     }
-    open fun safetyClient(let:String):Boolean{
-        return let == "t"
+    private fun safetyClient(let:String){
+        if(let == "f")
+        return
     }
-    open fun safetyServer(let:String):Boolean{
-        return let == "t"
+    private fun safetyServer(let:String){
+        if(let == "f")
+            return
     }
 }

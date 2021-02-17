@@ -1,5 +1,5 @@
-class Processor(val processor: String) {
+class Processor(private val processor: String) {
     fun info():String{
-        return "$processor"
+        return processor
     }
 }

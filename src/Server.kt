@@ -1,7 +1,7 @@
 import kotlin.math.sqrt
 
 class Server(override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
-    val w = Waiting()
+    private val w = Waiting()
 
     fun req(a:Int,b:Int,d:Float,e:Float,c:String,IF:String){
         serverReceive()
@@ -26,7 +26,7 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             statusServer()
         }
     }
-    open fun serverReceive(){
+    fun serverReceive(){
         println("Serwer: Odebrano zapytanie")
     }
     private fun resInt(a:Int,b:Int,d:Float,e:Float,c:String){
@@ -46,8 +46,8 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             println("Serwer: Wynik dzielenia liczb $a i $b to ${a/b}")
         }
         fun element(){
-            var d = a.toFloat()
-            var e = b.toFloat()
+            val d = a.toFloat()
+            val e = b.toFloat()
             println("Serwer: Pierwiastek liczb $a i $b to ${sqrt(d)} i ${sqrt(e)}")
         }
         if(c == "p"){plus()}
@@ -88,7 +88,7 @@ class Server(override val processor: Processor, override val graphics: Graphics,
         return
     }
     private fun ipCheck(){
-        println("$sip")
+        println(sip)
     }
     private fun restart(){
         println("Restartowanie serwera")

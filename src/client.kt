@@ -1,24 +1,24 @@
 import java.util.Scanner
 
 class Client (override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
-    val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
-    val w = Waiting()
-    val scan = Scanner(System.`in`)
+    private val server = Server(Processor("AMD Epyc 7742"), Graphics("none"), RAM(4096))
+    private val w = Waiting()
+    private val scan = Scanner(System.`in`)
 
 
     fun serverSend() {
         fun sending() {
             fun intSend() {
-                var float = 0.toFloat()
+                val float = 0.toFloat()
                 println("Wpisz pierwszą liczbę")
                 print("$ ")
-                var num1 = scan.nextInt()
+                val num1 = scan.nextInt()
                 println("Wpisz drugą liczbę")
                 print("$ ")
-                var num2 = scan.nextInt()
+                val num2 = scan.nextInt()
                 println("Wybierz sposób liczenia")
                 print("$ ")
-                var type = readLine()
+                val type = readLine()
 
                 if (type == "plus" || type == "+" || type == "dodawanie") {
                     server.req(num1, num2,float,float, "p","i")
@@ -36,37 +36,36 @@ class Client (override val processor: Processor, override val graphics: Graphics
                     println("Bad syntax")
                 }
             }
-            fun floatSend():Float {
+            fun floatSend(): Float {
                 println("Wpisz pierwszą liczbę")
                 print("$ ")
-                var num1 = readLine()!!.toFloat()
+                val num1 = readLine()!!.toFloat()
                 println("Wpisz drugą liczbę")
                 print("$ ")
-                var num2 = readLine()!!.toFloat()
+                val num2 = readLine()!!.toFloat()
                 println("Wybierz sposób liczenia")
                 print("$ ")
-                var type = readLine()
+                val type = readLine()
 
                 if (type == "plus" || type == "+" || type == "dodawanie") {
-                    server.req(0, 0,num1,num2, "p","f")
+                    server.req(0, 0, num1, num2, "p", "f")
                 } else if (type == "minus" || type == "-" || type == "odejmowanie") {
-                    server.req(0, 0,num1,num2, "m","f")
+                    server.req(0, 0, num1, num2, "m", "f")
                 } else if (type == "*" || type == "mnozenie" || type == "mnożenie") {
-                    server.req(0, 0,num1,num2, "r","f")
+                    server.req(0, 0, num1, num2, "r", "f")
                 } else if (type == "/" || type == "dzielenie" || type == "dziel") {
-                    server.req(0, 0,num1,num2, "d","f")
+                    server.req(0, 0, num1, num2, "d", "f")
                 } else if (type == "**" || type == "kwadrat" || type == "razy2") {
-                    server.req(0, 0,num1,num2, "s","f")
+                    server.req(0, 0, num1, num2, "s", "f")
                 } else if (type == "pierwiastek" || type == "element" || type == "pierw") {
-                    server.req(0, 0,num1,num2, "e","f")
+                    server.req(0, 0, num1, num2, "e", "f")
                 } else {
                     println("Bad syntax")
                 }
-                var sum = num1 + num2
-                return sum
+                return num1 + num2
             }
             println("Rodzaj liczby: Int/Float")
-            var numtype = readLine()
+            val numtype = readLine()
             if(numtype == "Int"){
                 intSend()
             }
@@ -98,7 +97,7 @@ class Client (override val processor: Processor, override val graphics: Graphics
         println("Klient: Czas dostępu do serwera wynosi ${w.r(10)}ms")
     }
     fun clientIp(){
-        println("$ip")
+        println(ip)
     }
     override fun info(){
         super.infoClient()

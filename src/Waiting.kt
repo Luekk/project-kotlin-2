@@ -1,10 +1,10 @@
 import java.lang.Thread.sleep
 
 class Waiting {
-    open fun w(a:Long){
+    fun w(a:Long){
         sleep(a)
     }
-    open fun wF(a:Long,b:Int){
+    fun wF(a:Long,b:Int){
         for(i in 0..b){
             w(a)
             print(".")
@@ -12,7 +12,7 @@ class Waiting {
         w(a)
         println()
     }
-    open fun r(a:Int):Int{
+    fun r(a:Int):Int{
         var random = (Math.random()*a).toInt()
         if(random == 0){
             random += 1

@@ -2,7 +2,6 @@ import kotlin.math.sqrt
 
 class Server(override val processor: Processor, override val graphics: Graphics, override val ram: RAM): Computer() {
     private val w = Waiting()
-
     fun req(a:Int,b:Int,d:Float,e:Float,c:String,IF:String){
         serverReceive()
         w.wF(1000,1)
@@ -24,6 +23,9 @@ class Server(override val processor: Processor, override val graphics: Graphics,
         }
         else if(c=="status" && IF == "n"){
             statusServer()
+        }
+        else{
+            log()
         }
     }
     fun serverReceive(){
@@ -96,5 +98,10 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             w.wF(1000, 2)
         }
         println("Serwer uruchomiony ponownie. Ip: $sip Port: $sport")
+    }
+    private fun log(){
+        println("Serwer komunikował się z: ")
+        println("Klientem o ip $ip działającym na porcie: $port")
+        println("oraz z dwoma innymi klientami")
     }
 }

@@ -102,5 +102,5 @@ class Client (override val processor: Processor, override val graphics: Graphics
     override fun info(){
         super.infoClient()
     }
-
+    fun log():Int{return 1}
 }

@@ -81,6 +81,7 @@ class Console {
         else if(type == "client -ip"){client.clientIp()}
         else if(type == "client -params"){client.infoClient()}
         else if(type == "server -params"){server.infoServer()}
+        else if(type == "server -l"){server.req(0,0,0.toFloat(),0.toFloat(),"logs","n")}
         else if(type == "server -s"){server.req(1,1,0.toFloat(),0.toFloat(),"status","n")}
         else if(type == "server -r"){server.req(1,2,0.toFloat(),0.toFloat(),"restart","n")}
         else if(type == "server -ip"){server.req(1,1,0.toFloat(),0.toFloat(),"ip","n")}

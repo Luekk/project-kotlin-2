@@ -21,6 +21,9 @@ class Server(override val processor: Processor, override val graphics: Graphics,
         else if(c=="restart" && IF == "n"){
             restart()
         }
+        else if(c=="list" && IF == "n"){
+            list()
+        }
         else if(c=="status" && IF == "n"){
             statusServer()
         }
@@ -98,6 +101,17 @@ class Server(override val processor: Processor, override val graphics: Graphics,
             w.wF(1000, 2)
         }
         println("Serwer uruchomiony ponownie. Ip: $sip Port: $sport")
+    }
+    private fun list(){
+        val client = "Client 1 port: $port ip: $ip"
+        val client1 = "Client 2 port: ? ip: ? -- disconnected"
+        val client2 = "Client 3 port ? ip: ? -- disconnected"
+        val list = mutableListOf<String>(client, client1, client2)
+        println("Lista połączeń: ")
+        for(client in 0..list.size-1){
+            println(list[client])
+        }
+
     }
     private fun log(){
         println("Serwer komunikował się z: ")
